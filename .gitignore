@@ -1,0 +1,9 @@
+Media/
+.DS_Store
+.claude/
+
+# Client videos not currently cleared for public display (see conversation history)
+assets/portfolio/portfolio-1.mp4
+assets/portfolio/portfolio-1-poster.jpg
+assets/portfolio/portfolio-3.mp4
+assets/portfolio/portfolio-3-poster.jpg
