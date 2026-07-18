@@ -137,15 +137,13 @@
       var name = document.getElementById("name").value.trim();
       var email = document.getElementById("email").value.trim();
       var company = document.getElementById("company").value.trim();
-      var interest = document.getElementById("interest").value;
       var message = document.getElementById("message").value.trim();
 
-      var subject = "Waller Media Inquiry — " + interest;
+      var subject = "Waller Media Inquiry — " + name;
       var bodyLines = [
         "Name: " + name,
         "Email: " + email,
         "Company/Firm: " + (company || "—"),
-        "Interested In: " + interest,
         "",
         "Message:",
         message
