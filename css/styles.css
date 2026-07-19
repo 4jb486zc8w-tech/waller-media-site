@@ -553,7 +553,7 @@ section { position: relative; }
   display: inline-block;
   align-self: flex-start;
   background: var(--ink);
-  color: #FFFFFF;
+  color: var(--gold);
   font-size: 0.68rem;
   line-height: 1.5;
   letter-spacing: 0.06em;
