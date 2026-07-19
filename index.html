@@ -271,7 +271,12 @@
         <p class="section-intro on-dark">Tell us a bit about what you need — coaching, production, or both — and we'll follow up to schedule your consultation.</p>
       </div>
 
-      <form class="contact-form glass-panel reveal" id="contactForm" novalidate>
+      <form class="contact-form glass-panel reveal" id="contactForm" novalidate action="https://formsubmit.co/derick@derickwaller.com" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry from the Waller Media website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
         <div class="form-row">
           <div class="form-field">
             <label for="name">Name <span aria-hidden="true">*</span></label>
@@ -300,7 +305,7 @@
           <span class="btn-label">Send Inquiry</span>
         </button>
 
-        <p class="form-note" id="formNote" role="status" aria-live="polite">Submitting opens your email app with this inquiry addressed to <a href="mailto:derick@derickwaller.com">derick@derickwaller.com</a>.</p>
+        <p class="form-note" id="formNote" role="status" aria-live="polite">Your message goes straight to Derick &mdash; no email app required.</p>
       </form>
     </div>
   </section>

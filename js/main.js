@@ -129,46 +129,54 @@
     return valid;
   }
 
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/derick@derickwaller.com";
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validate()) return;
 
-      var name = document.getElementById("name").value.trim();
-      var email = document.getElementById("email").value.trim();
-      var company = document.getElementById("company").value.trim();
-      var message = document.getElementById("message").value.trim();
+      var submitBtn = document.getElementById("submitBtn");
+      var btnLabel = submitBtn.querySelector(".btn-label");
+      var originalLabel = btnLabel.textContent;
 
-      var subject = "Waller Media Inquiry — " + name;
-      var bodyLines = [
-        "Name: " + name,
-        "Email: " + email,
-        "Company/Firm: " + (company || "—"),
-        "",
-        "Message:",
-        message
-      ];
-      var mailto =
-        "mailto:derick@derickwaller.com" +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(bodyLines.join("\n"));
+      submitBtn.disabled = true;
+      btnLabel.textContent = "Sending…";
+      if (formNote) formNote.classList.remove("success", "error");
 
-      window.location.href = mailto;
-
-      if (formNote) {
-        formNote.innerHTML = "Your email app should be opening now with this inquiry addressed to <a href=\"mailto:derick@derickwaller.com\">derick@derickwaller.com</a>. Just hit send.";
-        formNote.classList.add("success");
-      }
+      fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Submission failed");
+          form.reset();
+          if (formNote) {
+            formNote.textContent = "Thank you — your message has been sent. We'll be in touch soon.";
+            formNote.classList.add("success");
+          }
+        })
+        .catch(function () {
+          if (formNote) {
+            formNote.innerHTML = "Something went wrong sending your message. Please email us directly at <a href=\"mailto:derick@derickwaller.com\">derick@derickwaller.com</a>.";
+            formNote.classList.add("error");
+          }
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          btnLabel.textContent = originalLabel;
+        });
     });
 
-    form.querySelectorAll("input, textarea").forEach(function (field) {
+    form.querySelectorAll(".form-field input, .form-field textarea").forEach(function (field) {
       field.addEventListener("input", function () {
         var wrapper = field.closest(".form-field");
         if (wrapper.classList.contains("has-error")) {
           setError(field.id, "");
         }
-        if (formNote && formNote.classList.contains("success")) {
-          formNote.classList.remove("success");
+        if (formNote && (formNote.classList.contains("success") || formNote.classList.contains("error"))) {
+          formNote.classList.remove("success", "error");
           formNote.innerHTML = defaultNote;
         }
       });

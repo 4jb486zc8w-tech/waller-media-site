@@ -180,6 +180,11 @@ section { position: relative; }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
 
 .btn-primary {
   background: var(--ink);
@@ -756,6 +761,7 @@ section { position: relative; }
 }
 .form-note a { text-decoration: underline; }
 .form-note.success { color: #2f6b46; font-weight: 600; }
+.form-note.error { color: #9a3b3b; font-weight: 600; }
 
 /* =========================================================
    Footer
